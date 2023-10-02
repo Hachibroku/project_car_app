@@ -13,3 +13,11 @@ class VehicleRetrieveUpdateDestroy(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = VehicleSerializer
 
 # Repeat the pattern for Job, Part, and Tool models.
+class JobListCreate(generics.ListCreateAPIView):
+    queryset = Job.objects.all()
+    serializer_class = JobSerializer
+
+
+class JobRetrieveUpdateDestroy(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Job.objects.all()
+    serializer_class = JobSerializer
