@@ -1,0 +1,56 @@
+.vehicle-detail-container {
+    width: 70%;
+    margin: auto;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0px 0px 5px 0px #ddd;
+    padding: 20px;
+    color: #000;
+}
+
+.vehicle-item {
+    background-color: #fff;
+    padding: 15px;
+    margin: 10px 0;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+}
+
+.vehicle-item h3 {
+    margin: 0 0 10px;
+    color: #333;
+}
+
+.vehicle-item p {
+    margin: 5px 0;
+}
+
+.vehicle-jobs {
+    margin-top: 20px;
+    border-top: 1px solid #eee;
+    padding-top: 15px;
+}
+
+.job-item {
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    background-color: #fafafa;
+}
+
+.job-item h5 {
+    margin: 0 0 5px;
+    color: #555;
+}
+
+.job-item p {
+    margin: 5px 0;
+}
+
+.error {
+    color: red;
+    font-weight: bold;
+    margin-bottom: 20px;
+}

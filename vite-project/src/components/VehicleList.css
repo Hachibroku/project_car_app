@@ -1,0 +1,47 @@
+/* Parent container styling */
+.vehicle-list-container {
+  width: 70%;
+  margin: 30px auto;
+  background-color: #f9f9f9;
+  border-radius: 8px;
+  box-shadow: 0px 0px 5px 0px #ddd;
+  padding: 20px;
+  color: #000;
+}
+
+/* Error styling */
+.error-message {
+  background-color: #fdd;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Individual vehicle item styling */
+.vehicle-item {
+  background-color: #fff;
+  padding: 15px;
+  margin: 10px 0;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: background-color 0.3s; /* for hover effect */
+}
+
+.vehicle-item:hover {
+  background-color: #eef; /* subtle hover effect */
+}
+
+/* Styling for the vehicle name link */
+.vehicle-item a {
+  color: #0077CC;
+  text-decoration: none;
+}
+
+.vehicle-item a:hover {
+  text-decoration: underline;
+}
+
+/* To ensure
