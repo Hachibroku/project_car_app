@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import './VehicleList.css';
 
 function VehicleList() {
   const [vehicles, setVehicles] = useState([]);
@@ -26,8 +28,8 @@ function VehicleList() {
       <h2>Vehicle List</h2>
       {error && <div>{error}</div>}
       {vehicles.map((vehicle) => (
-        <div key={vehicle.id}>
-          <h3>{vehicle.name}</h3>
+        <div key={vehicle.id} className="vehicle-item">
+          <Link to={`/vehicles/${vehicle.id}`}>{vehicle.name}</Link>
           {/* Other vehicle attributes here */}
         </div>
       ))}
