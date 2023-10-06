@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import VehicleList from './components/VehicleList';
 import VehicleDetail from './components/VehicleDetail';
+import './App.css'
 
 function App() {
   return (
@@ -9,7 +10,7 @@ function App() {
       <div>
         <nav>
           <ul>
-            <li><a href="/vehicles">Vehicles</a></li>
+            <li><a href="/vehicles">Home</a></li>
             {/* Other nav links */}
           </ul>
         </nav>
