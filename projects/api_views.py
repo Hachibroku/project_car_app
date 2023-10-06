@@ -12,7 +12,13 @@ class VehicleRetrieveUpdateDestroy(generics.RetrieveUpdateDestroyAPIView):
     queryset = Vehicle.objects.all()
     serializer_class = VehicleSerializer
 
+
 class JobListCreate(generics.ListCreateAPIView):
+    queryset = Job.objects.all()
+    serializer_class = JobSerializer
+
+
+class JobRetrieveUpdateDestroy(generics.RetrieveUpdateDestroyAPIView):
     queryset = Job.objects.all()
     serializer_class = JobSerializer
 
@@ -25,11 +31,6 @@ class PartListCreate(generics.ListCreateAPIView):
 class PartRetrieveUpdateDestroy(generics.RetrieveUpdateDestroyAPIView):
     queryset = Part.objects.all()
     serializer_class = PartSerializer
-
-
-class JobRetrieveUpdateDestroy(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Job.objects.all()
-    serializer_class = JobSerializer
 
 
 class ToolListCreate(generics.ListCreateAPIView):
