@@ -139,3 +139,41 @@ button, input[type="submit"] {
   border-radius: 5px;
   margin-bottom: 15px;
 }
+
+.popup-form {
+  background-color: #333;
+  border-radius: 8px;
+  padding: 20px;
+  width: 400px;
+  box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+  margin: 20px auto;
+}
+
+.popup-form input,
+.popup-form textarea {
+  width: 93%;
+  padding: 10px;
+  margin-bottom: 10px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  font-size: 16px;
+  background-color: #ffffff;
+}
+
+.popup-form textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.popup-form button {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  font-size: 16px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.popup-form button:first-of-type {
+  margin-right: 10px;
+}
