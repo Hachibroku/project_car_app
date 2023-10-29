@@ -76,7 +76,7 @@ function VehicleDetail() {
 
     const startEditingJob = (job) => {
       setJobBeingEdited(job.id);
-      setEditedJobData(job); // Load current job data into the edit form
+      setEditedJobData(job);
     };
 
     const handleEditSave = (jobId) => {
@@ -90,7 +90,6 @@ function VehicleDetail() {
         method: 'DELETE',
     })
     .then(() => {
-        // Refresh your vehicle data or remove the job from the list
         setVehicle(prevState => ({ ...prevState, jobs: prevState.jobs.filter(job => job.id !== jobId) }));
     });
   };
@@ -98,16 +97,14 @@ function VehicleDetail() {
 
 
   return (
-    <div className="vehicle-detail-container">
-        <h2>Vehicle Detail</h2>
+    <div>
         {error && <div>{error}</div>}
         {vehicle ? (
-          <div className="vehicle-item">
-              <h3>{vehicle.name}</h3>
-              {/* ...existing code... */}
-
+          <div>
+              <h3>{vehicle.name} Project Details</h3>
+              <h4>Current Jobs:</h4>
               {showAddJobForm ? (
-                <div className="add-job-form">
+                <div className="popup-form">
                   <input  placeholder="Job Title" value={newJob.title} onChange={(e) => setNewJob({...newJob, title: e.target.value})} />
                   <textarea placeholder="Description" value={newJob.description} onChange={(e) => setNewJob({...newJob, description: e.target.value})} />
                   <input placeholder="Estimated Time (eg. 6:00:00 for 6 hours)" value={newJob.estimated_time} onChange={(e) => setNewJob({...newJob, estimated_time: e.target.value})} />
@@ -116,54 +113,67 @@ function VehicleDetail() {
                 </div>
               ) : (
                 <button onClick={toggleAddJobForm}>+ Add Job</button>
-              )}
+                    )}
 
-              {vehicle.jobs && vehicle.jobs.length > 0 ? (
-                <div className="vehicle-jobs">
-                    <h4>Jobs:</h4>
-                    {vehicle.jobs.map(job => (
-                      <div key={job.id} className="job-item">
-                          {jobBeingEdited === job.id ? (
-                              // Show edit form
-                              <>
-                                  <label>Title: </label>
-                                  <input
-                                      value={editedJobData.title}
-                                      onChange={(e) => setEditedJobData({...editedJobData, title: e.target.value})}
-                                  />
-
-                                  <label>Description: </label>
-                                  <textarea
-                                      value={editedJobData.description}
-                                      onChange={(e) => setEditedJobData({...editedJobData, description: e.target.value})}
-                                  />
-
-                                  <label>Estimated Time: </label>
-                                  <input
-                                      value={editedJobData.estimated_time}
-                                      onChange={(e) => setEditedJobData({...editedJobData, estimated_time: e.target.value})}
-                                  />
-
-                                  <button onClick={() => handleEditSave(job.id)}>Save</button>
-                                  <button onClick={() => setJobBeingEdited(null)}>Cancel</button>
-                              </>
-                          ) : (
-                              // Show job details
-                              <>
-                                  <h5>{job.title}</h5>
-                                  <p>{job.description}</p>
-                                  <p>Estimated Time: {job.estimated_time}</p>
-                                  <button onClick={() => startEditingJob(job)}>Edit</button>
-                                  <button onClick={() => handleJobDelete(job.id)}>Delete</button>
-                              </>
-                          )}
-                      </div>
-                  ))}
+                    {vehicle.jobs && vehicle.jobs.length > 0 ? (
+                        <div className="vehicle-table">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Title</th>
+                                        <th>Description</th>
+                                        <th>Estimated Time</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {vehicle.jobs.map(job => (
+                                        <tr key={job.id}>
+                                            {jobBeingEdited === job.id ? (
+                                                <>
+                                                    <td>
+                                                        <input
+                                                            value={editedJobData.title}
+                                                            onChange={(e) => setEditedJobData({...editedJobData, title: e.target.value})}
+                                                        />
+                                                    </td>
+                                                    <td>
+                                                        <textarea
+                                                            value={editedJobData.description}
+                                                            onChange={(e) => setEditedJobData({...editedJobData, description: e.target.value})}
+                                                        />
+                                                    </td>
+                                                    <td>
+                                                        <input
+                                                            value={editedJobData.estimated_time}
+                                                            onChange={(e) => setEditedJobData({...editedJobData, estimated_time: e.target.value})}
+                                                        />
+                                                    </td>
+                                                    <td>
+                                                        <button onClick={() => handleEditSave(job.id)}>Save</button>
+                                                        <button onClick={() => setJobBeingEdited(null)}>Cancel</button>
+                                                    </td>
+                                                </>
+                                            ) : (
+                                                <>
+                                                    <td>{job.title}</td>
+                                                    <td>{job.description}</td>
+                                                    <td>{job.estimated_time}</td>
+                                                    <td>
+                                                        <button onClick={() => startEditingJob(job)}>Edit</button>
+                                                        <button onClick={() => handleJobDelete(job.id)}>Delete</button>
+                                                    </td>
+                                                </>
+                                            )}
+                                        </tr>
+                                    ))}
+                                </tbody>
+                            </table>
+                        </div>
+                    ) : (
+                        <p>No Jobs assigned to this vehicle yet.</p>
+                    )}
                 </div>
-              ) : (
-                  <p>No Jobs assigned to this vehicle yet.</p>
-              )}
-          </div>
         ) : (
             <p>Loading...</p>
         )}
