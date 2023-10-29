@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import './VehicleDetail.css';
 
 function VehicleDetail() {
   const [vehicle, setVehicle] = useState(null);
