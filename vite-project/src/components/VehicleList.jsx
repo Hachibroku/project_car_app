@@ -98,54 +98,50 @@ function VehicleList() {
         <button onClick={() => setShowVehicleForm(false)}>Cancel</button>
      </div>
      )}
-      {error && <div>{error}</div>}
-      {vehicles.map((vehicle) => (
-        <div key={vehicle.id} className="vehicle-item">
-          {vehicleBeingEdited === vehicle.id ? (
-            // Show Edit form
-            <>
-                <input
-                    placeholder="Name"
-                    value={editedVehicleData.name}
-                    onChange={(e) => setEditedVehicleData({...editedVehicleData, name: e.target.value})}
-                />
-                <input
-                    placeholder="Make"
-                    value={editedVehicleData.make}
-                    onChange={(e) => setEditedVehicleData({...editedVehicleData, make: e.target.value})}
-                />
-                <input
-                    placeholder="Model"
-                    value={editedVehicleData.model}
-                    onChange={(e) => setEditedVehicleData({...editedVehicleData, model: e.target.value})}
-                />
-                <input
-                    placeholder="Year"
-                    type="number"
-                    value={editedVehicleData.year}
-                    onChange={(e) => setEditedVehicleData({...editedVehicleData, year: e.target.value})}
-                />
+            {error && <div className="error">{error}</div>}
 
-                <button onClick={() => handleEditSave(vehicle.id)}>Save</button>
-                <button onClick={() => setVehicleBeingEdited(null)}>Cancel</button>
-            </>
-          ) : (
-            <>
-                    <div className="vehicle-name">
-                        <Link to={`/vehicles/${vehicle.id}`}>{vehicle.name} - {vehicle.year} {vehicle.make} {vehicle.model}</Link>
-                    </div>
-                    <div className="vehicle-edit">
-                        <button onClick={() => startEditingVehicle(vehicle)}>Edit</button>
-                    </div>
-                    <div className="vehicle-delete">
-                        <button onClick={() => handleVehicleDelete(vehicle.id)}>Delete</button>
-                    </div>
-            </>
-          )}
-        </div>
-      ))}
-    </div>
-  );
+    <table className="vehicle-table">
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Year</th>
+                <th>Make</th>
+                <th>Model</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {vehicles.map((vehicle) => (
+                <tr key={vehicle.id}>
+                    {vehicleBeingEdited === vehicle.id ? (
+                        <>
+                            <td><input placeholder="Name" value={editedVehicleData.name} onChange={(e) => setEditedVehicleData({...editedVehicleData, name: e.target.value})} /></td>
+                            <td><input placeholder="Make" value={editedVehicleData.make} onChange={(e) => setEditedVehicleData({...editedVehicleData, make: e.target.value})} /></td>
+                            <td><input placeholder="Model" value={editedVehicleData.model} onChange={(e) => setEditedVehicleData({...editedVehicleData, model: e.target.value})} /></td>
+                            <td><input placeholder="Year" type="number" value={editedVehicleData.year} onChange={(e) => setEditedVehicleData({...editedVehicleData, year: e.target.value})} /></td>
+                            <td>
+                                <button onClick={() => handleEditSave(vehicle.id)}>Save</button>
+                                <button onClick={() => setVehicleBeingEdited(null)}>Cancel</button>
+                            </td>
+                        </>
+                    ) : (
+                        <>
+                            <td><Link to={`/vehicles/${vehicle.id}`}>{vehicle.name}</Link></td>
+                            <td>{vehicle.year}</td>
+                            <td>{vehicle.make}</td>
+                            <td>{vehicle.model}</td>
+                            <td>
+                                <button onClick={() => startEditingVehicle(vehicle)}>Edit</button>
+                                <button onClick={() => handleVehicleDelete(vehicle.id)}>Delete</button>
+                            </td>
+                        </>
+                    )}
+                </tr>
+            ))}
+        </tbody>
+    </table>
+</div>
+);
 }
 
 export default VehicleList;
