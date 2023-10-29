@@ -29,6 +29,10 @@ function VehicleList() {
       });
   }, []);
 
+  const toggleAddVehicleForm = () => {
+    setShowAddVehicleForm(!showAddVehicleForm);
+  };
+
   const handleVehicleSubmit = () => {
     fetch('http://localhost:8000/projects/api/vehicles/', {
         method: 'POST',
@@ -116,7 +120,7 @@ function VehicleList() {
         <input placeholder="Model" value={newVehicle.model} onChange={(e) => setNewVehicle({...newVehicle, model: e.target.value})} />
         <input placeholder="Year" type="number" value={newVehicle.year} onChange={(e) => setNewVehicle({...newVehicle, year: e.target.value})} />
         <button onClick={handleVehicleSubmit}>Submit</button>
-        <button onClick={() => setShowVehicleForm(false)}>Cancel</button>
+        <button onClick={() => toggleAddVehicleForm(false)}>Cancel</button>
      </div>
      )}
             {error && <div className="error">{error}</div>}
