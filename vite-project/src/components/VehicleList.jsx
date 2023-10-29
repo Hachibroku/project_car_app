@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import './VehicleList.css';
 
 function VehicleList() {
   const [vehicles, setVehicles] = useState([]);
@@ -9,6 +8,9 @@ function VehicleList() {
   const [showAddVehicleForm, setShowAddVehicleForm] = useState(false);
   const [vehicleBeingEdited, setVehicleBeingEdited] = useState(null);
   const [editedVehicleData, setEditedVehicleData] = useState({ name: "", make: "", model: "", year: "" });
+  const [sortField, setSortField] = useState('name');
+  const [sortDirection, setSortDirection] = useState('asc');
+
 
   useEffect(() => {
     fetch('http://localhost:8000/projects/api/vehicles/')
@@ -38,7 +40,7 @@ function VehicleList() {
     .then(response => response.json())
     .then(data => {
         setVehicles([...vehicles, data]);
-        setNewVehicle({ name: '', make: '', model: '', year: '' }); // Reset the form
+        setNewVehicle({ name: '', make: '', model: '', year: '' });
     });
  };
 
@@ -54,18 +56,18 @@ function VehicleList() {
   .then(data => {
       const updatedVehicles = vehicles.map(vehicle => {
           if (vehicle.id === vehicleId) {
-              return data; // Updated vehicle data from the backend
+              return data;
           }
           return vehicle;
       });
       setVehicles(updatedVehicles);
-      setVehicleBeingEdited(null); // Exit the editing mode
+      setVehicleBeingEdited(null);
   });
  };
 
   const startEditingVehicle = (vehicle) => {
    setVehicleBeingEdited(vehicle.id);
-   setEditedVehicleData(vehicle); // Populate edit fields with current data
+   setEditedVehicleData(vehicle);
   };
 
   const handleEditSave = (vehicleId) => {
@@ -81,6 +83,25 @@ function VehicleList() {
       setVehicles(vehicles.filter(vehicle => vehicle.id !== vehicleId));
   });
  };
+
+ const handleSort = (field) => {
+  if (sortField === field) {
+    setSortDirection(sortDirection === 'asc' ? 'desc' : 'asc');
+  } else {
+    setSortField(field);
+    setSortDirection('asc');
+  }
+};
+
+  const sortedVehicles = [...vehicles].sort((a, b) => {
+    if (a[sortField] < b[sortField]) {
+      return sortDirection === 'asc' ? -1 : 1;
+    }
+    if (a[sortField] > b[sortField]) {
+      return sortDirection === 'asc' ? 1 : -1;
+    }
+    return 0;
+  });
 
 
   return (
@@ -103,15 +124,15 @@ function VehicleList() {
     <table className="vehicle-table">
         <thead>
             <tr>
-                <th>Name</th>
-                <th>Year</th>
-                <th>Make</th>
-                <th>Model</th>
-                <th>Actions</th>
+              <th onClick={() => handleSort('name')}>Name {sortField === 'name' && (sortDirection === 'asc')}</th>
+              <th onClick={() => handleSort('year')}>Year {sortField === 'name' && (sortDirection === 'asc')}</th>
+              <th onClick={() => handleSort('make')}>Make {sortField === 'name' && (sortDirection === 'asc')}</th>
+              <th onClick={() => handleSort('model')}>Model {sortField === 'name' && (sortDirection === 'asc')}</th>
+              <th>Actions</th>
             </tr>
         </thead>
         <tbody>
-            {vehicles.map((vehicle) => (
+            {sortedVehicles.map((vehicle) => (
                 <tr key={vehicle.id}>
                     {vehicleBeingEdited === vehicle.id ? (
                         <>
