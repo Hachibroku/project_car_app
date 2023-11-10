@@ -110,19 +110,25 @@ function VehicleList() {
 
   return (
     <div>
+        <nav>
+          <ul>
+            <li><a href="/vehicles">Home</a></li>
+          </ul>
+          <button onClick={() => setShowAddVehicleForm(true)}>Add New Vehicle</button>
+            {showAddVehicleForm && (
+            <div className="popup-form">
+              <h3>Create a New Vehicle</h3>
+              <input placeholder="Vehicle Name" value={newVehicle.name} onChange={(e) => setNewVehicle({...newVehicle, name: e.target.value})} />
+              <input placeholder="Make" value={newVehicle.make} onChange={(e) => setNewVehicle({...newVehicle, make: e.target.value})} />
+              <input placeholder="Model" value={newVehicle.model} onChange={(e) => setNewVehicle({...newVehicle, model: e.target.value})} />
+              <input placeholder="Year" type="number" value={newVehicle.year} onChange={(e) => setNewVehicle({...newVehicle, year: e.target.value})} />
+              <button onClick={handleVehicleSubmit}>Submit</button>
+              <button onClick={() => toggleAddVehicleForm(false)}>Cancel</button>
+          </div>
+          )}
+        </nav>
       <h2>Vehicle List</h2>
-      <button onClick={() => setShowAddVehicleForm(true)}>Add New Vehicle</button>
-      {showAddVehicleForm && (
-      <div className="popup-form">
-        <h3>Create a New Vehicle</h3>
-        <input placeholder="Vehicle Name" value={newVehicle.name} onChange={(e) => setNewVehicle({...newVehicle, name: e.target.value})} />
-        <input placeholder="Make" value={newVehicle.make} onChange={(e) => setNewVehicle({...newVehicle, make: e.target.value})} />
-        <input placeholder="Model" value={newVehicle.model} onChange={(e) => setNewVehicle({...newVehicle, model: e.target.value})} />
-        <input placeholder="Year" type="number" value={newVehicle.year} onChange={(e) => setNewVehicle({...newVehicle, year: e.target.value})} />
-        <button onClick={handleVehicleSubmit}>Submit</button>
-        <button onClick={() => toggleAddVehicleForm(false)}>Cancel</button>
-     </div>
-     )}
+
             {error && <div className="error">{error}</div>}
 
     <table className="vehicle-table">

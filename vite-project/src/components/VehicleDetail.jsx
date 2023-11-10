@@ -98,12 +98,12 @@ function VehicleDetail() {
 
   return (
     <div>
-        {error && <div>{error}</div>}
-        {vehicle ? (
-          <div>
-              <h3>{vehicle.name} Project Details</h3>
-              <h4>Current Jobs:</h4>
-              {showAddJobForm ? (
+        <nav>
+          <ul>
+            <li><a href="/vehicles">Home</a></li>
+            {/* Other nav links */}
+          </ul>
+          {showAddJobForm ? (
                 <div className="popup-form">
                   <input  placeholder="Job Title" value={newJob.title} onChange={(e) => setNewJob({...newJob, title: e.target.value})} />
                   <textarea placeholder="Description" value={newJob.description} onChange={(e) => setNewJob({...newJob, description: e.target.value})} />
@@ -113,7 +113,14 @@ function VehicleDetail() {
                 </div>
               ) : (
                 <button onClick={toggleAddJobForm}>+ Add Job</button>
-                    )}
+            )}
+        </nav>
+        {error && <div>{error}</div>}
+        {vehicle ? (
+          <div>
+              <h3>{vehicle.name} Project Details</h3>
+              <h4>Current Jobs:</h4>
+
 
                     {vehicle.jobs && vehicle.jobs.length > 0 ? (
                         <div className="vehicle-table">
