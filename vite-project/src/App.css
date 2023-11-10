@@ -1,13 +1,82 @@
-body, h1, h2, h3, h4, h5, p {
-  margin: 0;
-  padding: 0;
-  font-family: 'Arial', sans-serif;
+/* Navigation bar universal styling */
+nav {
+  background-color: #333; /* Background color for the nav bar */
+  padding: 1rem 10%; /* Vertical and horizontal padding */
+  position: fixed; /* Fix position to the top of the page */
+  top: 0; /* Align to the top */
+  left: 0; /* Align to the left */
+  width: 100%; /* Full width */
+  z-index: 10; /* Ensure it sits above other content */
+  display: flex; /* Use flex for horizontal alignment */
+  justify-content: left; /* Center items horizontally */
+  align-items: center; /* Center items vertically */
+}
+
+/* Minimal specific styles for the list */
+nav ul {
+  list-style-type: none; /* Remove bullet points from list items */
+  display: flex; /* Align list items in a row */
+  padding: 0; /* Remove default padding */
+  margin: 0; /* Remove default margin */
+}
+
+/* Universal link and button styling within the nav */
+nav a, nav button {
+  color: white; /* Text color */
+  text-decoration: none; /* No underline for links */
+  padding: 0.5rem 1rem; /* Padding inside each item */
+  font-size: 1rem; /* Font size */
+  border: none; /* Remove border for buttons */
+  background: none; /* Remove any default background for buttons */
+  cursor: pointer; /* Hand cursor on hover */
+}
+
+/* Hover effects for links and buttons */
+nav a:hover, nav button:hover {
+  background-color: #111; /* Darker background on hover */
 }
 
 body {
+  margin: 0;
+  padding: 20px; /* Add some padding around the edges of the page content */
+  font-family: 'Arial', sans-serif;
   background-color: #181818;
   color: #e4e4e4;
   line-height: 1.6;
+  padding-top: 60px; /* This accounts for the fixed navbar */
+}
+
+h1, h2, h3, h4, h5 {
+  margin-top: 20px; /* Add margin to the top of headings */
+  margin-bottom: 10px; /* Add some space below headings */
+  padding-left: 10px; /* Add some padding to align text off the edge */
+}
+
+h1 {
+  font-size: 2.5rem;
+}
+
+h2 {
+  font-size: 2rem;
+}
+
+h3 {
+  font-size: 1.75rem;
+  padding-left: 20px; /* Increase padding for h3 for visual hierarchy */
+}
+
+h4 {
+  font-size: 1.5rem;
+  padding-left: 30px; /* Increase padding for h4 to be indented more than h3 */
+}
+
+h5 {
+  font-size: 1.25rem;
+}
+
+p {
+  margin-bottom: 1rem;
+  font-size: 1rem;
 }
 
 a {
@@ -166,7 +235,7 @@ button, input[type="submit"] {
   min-height: 100px;
 }
 
-.popup-form button {
+/* .popup-form button {
   padding: 10px 15px;
   border: none;
   border-radius: 4px;
@@ -177,4 +246,4 @@ button, input[type="submit"] {
 
 .popup-form button:first-of-type {
   margin-right: 10px;
-}
+} */
