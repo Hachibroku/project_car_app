@@ -41,10 +41,19 @@ function VehicleList() {
         },
         body: JSON.stringify(newVehicle)
     })
-    .then(response => response.json())
+    .then(response => {
+      if (!response.ok) {
+        throw new Error('Unexpected network response');
+      }
+      return response.json();
+    })
     .then(data => {
         setVehicles([...vehicles, data]);
         setNewVehicle({ name: '', make: '', model: '', year: '' });
+        setShowAddVehicleForm(false);
+    })
+    .catch(error => {
+      setError(error.message);
     });
  };
 
